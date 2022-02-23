@@ -11,14 +11,14 @@ public class HomeController {
     Connect4 game = new Connect4(3,5,3);
 
     @RequestMapping("/")
-    public String getHelloWorld(){
+    public String getMatrix(){
         String html= HtmlViewer.getMatrix(game.getMatrix());
         System.out.println(html);
         return html;
     }
     // example: /move?player=1&index=3
     @RequestMapping(value="/move", method = RequestMethod.GET)
-    public String connect4Move(@RequestParam("player") int player,@RequestParam("index") int index){
+    public String doConnect4Move(@RequestParam("player") int player,@RequestParam("index") int index){
         Message msg=game.setMark(index,player);
         System.out.println("Message:"+msg.isSuccessful());
         if(!msg.isSuccessful()||msg.isEnd())  return msg.getMessage();
