@@ -2,9 +2,9 @@ package com.score4.score4.view;
 
 public class HtmlViewer {
 
-    static final String X="<img src=\"https://www.w3schools.com/images/lamp.jpg\" alt=\"Lamp\" width=\"32\" height=\"32\">";
-    static final String O="<img src=\"https://www.w3schools.com/images/lamp.jpg\" alt=\"Lamp\" width=\"32\" height=\"32\">";
-    static final String empty="<img src=\"https://www.w3schools.com/images/lamp.jpg\" alt=\"Lamp\" width=\"32\" height=\"32\">";
+    static final String X="<img src=\"https://pngimg.com/uploads/circle/small/circle_PNG4.png\" alt=\"Lamp\" width=\"32\" height=\"32\">";
+    static final String O="<img src=\"https://pngimg.com/uploads/circle/circle_PNG3.png\" alt=\"Lamp\" width=\"32\" height=\"32\">";
+    static final String empty="<img src=\"https://pngimg.com/uploads/circle/circle_PNG2.png\" alt=\"Lamp\" width=\"32\" height=\"32\">";
     static final String line="<br>";
     /*
     Creates html code from a Connect4 matrix
@@ -24,7 +24,7 @@ public class HtmlViewer {
             for (int i = 0; i < matrix.length; i++) {
                 if (matrix[i][j] == null)
                     out.append(empty);
-                else if (matrix[i][j] == 0)
+                else if (matrix[i][j].equals(1) )
                     out.append(O);
                 else
                     out.append(X);

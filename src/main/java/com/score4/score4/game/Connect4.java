@@ -61,8 +61,9 @@ public class Connect4 {
 
     public Integer checkIfSomeoneWinsVertically(){
 
-        int counterP1=0,counterP2=0;
+        int counterP1,counterP2;
         for(int i=0;i<matrix.length;i++){
+            counterP1=0;counterP2=0;
             for(int j=0;j<matrix[i].length;j++){
                 if(matrix[i][j]==null)
                     break;
@@ -91,8 +92,9 @@ public class Connect4 {
 
     public Integer checkIfSomeoneWinsHorizontally(){
 
-        int counterP1=0,counterP2=0;
+        int counterP1,counterP2;
         for(int i=0;i<matrix[0].length;i++){
+            counterP1=0;counterP2=0;
             for(int j=0;j<matrix.length;j++){
                 if(matrix[j][i]==null)
                     break;
