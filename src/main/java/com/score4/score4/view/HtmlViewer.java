@@ -19,20 +19,19 @@ public class HtmlViewer {
      */
     public static String getMatrix(Integer[][] matrix){
 
-        String out="<html>";
+        StringBuilder out= new StringBuilder("<html>");
         for(int j=matrix[0].length-1;j>=0;j--) {
             for (int i = 0; i < matrix.length; i++) {
-                System.out.println("i:"+j+" j:"+i);
                 if (matrix[i][j] == null)
-                    out += empty;
+                    out.append(empty);
                 else if (matrix[i][j] == 0)
-                    out += O;
+                    out.append(O);
                 else
-                    out += X;
+                    out.append(X);
             }
-            out+=line;
+            out.append(line);
         }
-        out+="</html>";
-        return out;
+        out.append("</html>");
+        return out.toString();
     }
 }

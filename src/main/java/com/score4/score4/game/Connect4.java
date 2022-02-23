@@ -15,6 +15,7 @@ public class Connect4 {
         turn1=true;
         turn2=false;
         this.maxPoints=maxPoints;
+        System.out.println(matrix.length+"x"+matrix[0].length);
     }
 
     public Integer[][] getMatrix() {
@@ -27,25 +28,36 @@ public class Connect4 {
 
     public Message setMark(int indexX,int player){
 
-        if(player==p1&&turn1==false)
+        System.out.println("setMark: index="+indexX+", player="+player);
+
+        if(player==p1&&!turn1)
             return new Message(false,"It is not the turn of Player 1");
-        else if(player==p2&&turn2==false)
+        else if(player==p2&&!turn2)
             return new Message(false,"It is not the turn of Player 2");
         else if(player!=p1&&player!=p2)
             return new Message(false,"Invalid Player");
-        else if(indexX>matrix.length||indexX<0)
+        else if(indexX>matrix.length-1||indexX<0)
             return new Message(false,"Invalid Position");
-        else if(matrix[indexX][matrix.length]!=null)
+        else if(matrix[indexX][matrix[0].length-1]!=null)
             return new Message(false,"Position is full");
         else{
             Integer y=getEmptyPosition(indexX);
             if(y==null) return new Message(false,"Error could not compute the Empty Position");
             matrix[indexX][y]=player;
+            turn1=!turn1;
+            turn2=!turn2;
+            Integer won=checkIfSomeoneWon();
+            if(won!=null ) return new Message(true,true,"Player "+won+" has won.");
             return new Message(true,"Move was executed successfully");
         }
     }
 
-
+    public Integer checkIfSomeoneWon(){
+        Integer out=checkIfSomeoneWinsVertically();
+        if(out!=null) return out;
+        out=checkIfSomeoneWinsHorizontally();
+        return out;
+    }
 
     public Integer checkIfSomeoneWinsVertically(){
 
@@ -99,24 +111,24 @@ public class Connect4 {
     }
 
     public Integer getEmptyPosition(int x){
-        for(int i=0;i<matrix.length;i++)
+        for(int i=0;i<matrix[0].length;i++)
             if(matrix[x][i]==null) return i;
         return null;
     }
 
     public String printMatrix(){
-        String out="";
+        StringBuilder out= new StringBuilder();
         for(Integer[] column:matrix){
             for(Integer cell:column){
-                if(cell==null)   out+=" [_]";
-                else if(cell==1) out+=" [X] ";
-                else if(cell==2) out+=" [O]";
-                else out+=" [$]";//error
+                if(cell==null)   out.append(" [_]");
+                else if(cell==1) out.append(" [X] ");
+                else if(cell==2) out.append(" [O]");
+                else out.append(" [$]");//error
             }
-            out+= System.lineSeparator() ;
+            out.append(System.lineSeparator());
         }
         System.out.println(out);
-        return out;
+        return out.toString();
 
     }
 

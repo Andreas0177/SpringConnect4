@@ -12,20 +12,20 @@ public class HomeController {
 
     @RequestMapping("/")
     public String getHelloWorld(){
-
-        //return game.printMatrix();
         String html= HtmlViewer.getMatrix(game.getMatrix());
         System.out.println(html);
         return html;
     }
-
+    // /move?player=1&index=3
     @RequestMapping(value="/move", method = RequestMethod.GET)
     public @ResponseBody
     String getItem(@RequestParam("player") int player,@RequestParam("index") int index){
         Message msg=game.setMark(index,player);
-        System.out.println("player="+player+", index="+index);
-        return msg.getMessage();
+        System.out.println("Message:"+msg.isSuccessful());
+        if(!msg.isSuccessful()||msg.isEnd())  return msg.getMessage();
+        else return HtmlViewer.getMatrix(game.getMatrix());
     }
+
 
 
 
