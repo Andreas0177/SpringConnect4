@@ -1,17 +1,31 @@
 package com.score4.score4.controllers;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.score4.score4.game.Connect4;
+import com.score4.score4.models.Message;
+import com.score4.score4.view.HtmlViewer;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class HomeController {
 
+    Connect4 game = new Connect4(3,5,3);
+
     @RequestMapping("/")
-    public String getHelloWOrld(){
-        return "Hello Spring";
+    public String getHelloWorld(){
+
+        //return game.printMatrix();
+        String html= HtmlViewer.getMatrix(game.getMatrix());
+        System.out.println(html);
+        return html;
     }
 
-
+    @RequestMapping(value="/move", method = RequestMethod.GET)
+    public @ResponseBody
+    String getItem(@RequestParam("player") int player,@RequestParam("index") int index){
+        Message msg=game.setMark(index,player);
+        System.out.println("player="+player+", index="+index);
+        return msg.getMessage();
+    }
 
 
 

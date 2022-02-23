@@ -104,4 +104,20 @@ public class Connect4 {
         return null;
     }
 
+    public String printMatrix(){
+        String out="";
+        for(Integer[] column:matrix){
+            for(Integer cell:column){
+                if(cell==null)   out+=" [_]";
+                else if(cell==1) out+=" [X] ";
+                else if(cell==2) out+=" [O]";
+                else out+=" [$]";//error
+            }
+            out+= System.lineSeparator() ;
+        }
+        System.out.println(out);
+        return out;
+
+    }
+
 }
