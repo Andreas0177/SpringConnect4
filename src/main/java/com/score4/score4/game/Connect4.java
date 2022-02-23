@@ -1,6 +1,10 @@
 package com.score4.score4.game;
 
 import com.score4.score4.models.Message;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Scope;
 
 public class Connect4 {
 
@@ -10,12 +14,26 @@ public class Connect4 {
 
     final int maxPoints,p1=1,p2=2;
 
+    public Connect4(){
+        matrix=new Integer[6][5];
+        turn1=true;
+        turn2=false;
+        this.maxPoints=3;
+        System.out.println(matrix.length+"x"+matrix[0].length);
+    }
+
     public Connect4(int x,int y,int maxPoints){
         matrix=new Integer[x][y];
         turn1=true;
         turn2=false;
         this.maxPoints=maxPoints;
         System.out.println(matrix.length+"x"+matrix[0].length);
+    }
+
+    @Bean
+    @Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
+    public Connect4 Connect4Singleton() {
+        return new Connect4(6,5,3);
     }
 
     public Integer[][] getMatrix() {
